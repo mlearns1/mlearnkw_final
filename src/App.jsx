@@ -58,16 +58,16 @@ export default function App() {
 
         {lesson === "bloodflow" && (
           <>
-            <h2 className="text-xl font-semibold mb-2">🩸 رحلة الدم في القلب</h2>
-            <p className="mb-4 text-gray-700">
-              يدخل الدم غير المؤكسج من الجسم إلى الأذين الأيمن، ثم ينتقل إلى البطين الأيمن، ومنه إلى الرئتين ليتأكسج.
-              بعد ذلك يعود إلى الأذين الأيسر، ثم البطين الأيسر، وأخيراً يُضخ إلى الجسم كله.
-            </p>
+            <h2 className="text-xl font-semibold mb-4 text-red-500">🩸 رحلة الدم في القلب</h2>
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Heart_diagram_blood_flow_arrows.svg/1024px-Heart_diagram_blood_flow_arrows.svg.png"
               alt="رحلة الدم"
-              className="rounded-xl shadow mb-4 mx-auto"
+              className="rounded-xl shadow mb-4 mx-auto w-full"
             />
+            <p className="mb-6 text-gray-700 leading-loose">
+              يدخل الدم غير المؤكسج من الجسم إلى الأذين الأيمن، ثم ينتقل إلى البطين الأيمن، ومنه إلى الرئتين ليتأكسج.
+              بعد ذلك يعود إلى الأذين الأيسر، ثم البطين الأيسر، وأخيراً يُضخ إلى الجسم كله.
+            </p>
             <button
               onClick={() => setLesson("main")}
               className="text-gray-500 text-sm underline"
