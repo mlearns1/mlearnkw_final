@@ -1,84 +1,80 @@
+// ✅ ملف: src/App.jsx
 
 import React, { useState } from "react";
 
 export default function App() {
-  const [selectedSubject, setSelectedSubject] = useState(null);
-  const [selectedLesson, setSelectedLesson] = useState(null);
-  const [learningStyle, setLearningStyle] = useState(null);
+  const [lesson, setLesson] = useState("main");
 
-  const handleSelectSubject = (subject) => {
-    setSelectedSubject(subject);
-  };
-
-  const handleSelectLesson = (lesson) => {
-    setSelectedLesson(lesson);
-  };
-
-  const reset = () => {
-    setSelectedSubject(null);
-    setSelectedLesson(null);
-    setLearningStyle(null);
+  const openSketchfab = () => {
+    window.open("https://sketchfab.com/3d-models/heart-3d-organ-4ef81eb13225438192ca0a23e3794ee1", "_blank");
   };
 
   return (
-    <div style={{ minHeight: '100vh', padding: '2rem', background: 'linear-gradient(to bottom right, #c7e7f9, #fef3f5)', textAlign: 'center' }}>
-      <div style={{ maxWidth: 700, margin: 'auto', background: '#fff', borderRadius: 20, padding: '2rem', boxShadow: '0 0 20px rgba(0,0,0,0.1)' }}>
-        <h1 style={{ fontSize: '2rem', color: '#d63384', marginBottom: '1rem' }}>mLearnKW 📚</h1>
-
-        {!selectedSubject ? (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 to-blue-100 p-6">
+      <div className="bg-white shadow-xl rounded-2xl p-6 max-w-xl w-full text-center">
+        {lesson === "main" && (
           <>
-            <h2>اختر المادة التعليمية</h2>
-            <button onClick={() => handleSelectSubject("science")}>🧪 العلوم</button>
+            <h1 className="text-3xl font-bold mb-2 text-pink-600">mLearnKW 📚</h1>
+            <p className="text-lg mb-4">اختر طريقتك المفضلة للتعلم 👇</p>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={() => setLesson("visual")}
+                className="bg-pink-500 text-white px-4 py-2 rounded-xl shadow hover:bg-pink-600"
+              >
+                بصري (صور)
+              </button>
+              <button
+                onClick={() => setLesson("bloodflow")}
+                className="bg-red-400 text-white px-4 py-2 rounded-xl shadow hover:bg-red-500"
+              >
+                رحلة الدم 🩸
+              </button>
+            </div>
           </>
-        ) : !selectedLesson ? (
+        )}
+
+        {lesson === "visual" && (
           <>
-            <h2>اختر الدرس</h2>
-            <button onClick={() => handleSelectLesson("heart")}>🫀 القلب</button>
+            <h2 className="text-xl font-semibold mb-2">درس: القلب (visual)</h2>
+            <button
+              onClick={openSketchfab}
+              className="text-blue-600 underline mb-4 block"
+            >
+              💗 عرض نموذج القلب
+            </button>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Diagram_of_the_human_heart_%28cropped%29.svg/1024px-Diagram_of_the_human_heart_%28cropped%29.svg.png"
+              alt="مخطط القلب"
+              className="rounded-xl shadow mb-4 mx-auto"
+            />
+            <button
+              onClick={() => setLesson("main")}
+              className="text-gray-500 text-sm underline"
+            >
+              🔙 العودة للاختيار
+            </button>
           </>
-        ) : !learningStyle ? (
+        )}
+
+        {lesson === "bloodflow" && (
           <>
-            <h2>شلون تبي تتعلّم؟</h2>
-            <button onClick={() => setLearningStyle("visual")}>👁️ بصري</button>
-            <button onClick={() => setLearningStyle("auditory")}>🎧 سمعي</button>
-            <button onClick={() => setLearningStyle("kinesthetic")}>🕹 تجريبي</button>
-            <button onClick={() => setLearningStyle("reading")}>📖 قرائي</button>
-            <button onClick={() => setLearningStyle("story")}>📚 قصصي</button>
+            <h2 className="text-xl font-semibold mb-2">🩸 رحلة الدم في القلب</h2>
+            <p className="mb-4 text-gray-700">
+              يدخل الدم غير المؤكسج من الجسم إلى الأذين الأيمن، ثم ينتقل إلى البطين الأيمن، ومنه إلى الرئتين ليتأكسج.
+              بعد ذلك يعود إلى الأذين الأيسر، ثم البطين الأيسر، وأخيراً يُضخ إلى الجسم كله.
+            </p>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Heart_diagram_blood_flow_arrows.svg/1024px-Heart_diagram_blood_flow_arrows.svg.png"
+              alt="رحلة الدم"
+              className="rounded-xl shadow mb-4 mx-auto"
+            />
+            <button
+              onClick={() => setLesson("main")}
+              className="text-gray-500 text-sm underline"
+            >
+              🔙 العودة للاختيار
+            </button>
           </>
-        ) : (
-          <div>
-            <h2>درس: القلب ({learningStyle})</h2>
-
-            {learningStyle === "visual" && (
-              <>
-                <p><a href="https://sketchfab.com/models/4ef81eb13225438192ca0a23e3794ee1" target="_blank">عرض نموذج القلب 🫀</a></p>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Diagram_of_the_human_heart_%28cropped%29.svg" alt="رسم القلب" style={{ maxWidth: '100%', borderRadius: 10 }} />
-              </>
-            )}
-
-            {learningStyle === "auditory" && (
-              <p>🎧 استمع إلى شرح صوتي بسيط (لاحقًا)</p>
-            )}
-
-            {learningStyle === "kinesthetic" && (
-              <p>🕹 استخدم الإطار التفاعلي لتحريك المجسم (مثال IR Frame)</p>
-            )}
-
-            {learningStyle === "reading" && (
-              <>
-                <p>القلب هو عضو يضخ الدم، يحتوي على أربع حجرات...</p>
-                <ul style={{ textAlign: 'right' }}>
-                  <li>ما وظيفة القلب؟</li>
-                  <li>كم عدد حجراته؟</li>
-                </ul>
-              </>
-            )}
-
-            {learningStyle === "story" && (
-              <p>📚 كان يا ما كان... في جسد صغير، قلب يحب مساعدة الأعضاء ❤️</p>
-            )}
-
-            <button onClick={reset} style={{ marginTop: 20 }}>🔁 العودة للاختيار</button>
-          </div>
         )}
       </div>
     </div>
